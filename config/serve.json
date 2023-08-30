@@ -4,7 +4,7 @@
   "https": true,
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://{tenantDomain}/SitePages/myPage.aspx",
+      "pageUrl": "https://expiredsmellthis.sharepoint.com/sites/socks",
       "customActions": {
         "6bfd4451-fac3-413c-af87-3ec3a36ec7ee": {
           "location": "ClientSideExtension.ApplicationCustomizer",
@@ -15,7 +15,7 @@
       }
     },
     "spoAnalytics": {
-      "pageUrl": "https://{tenantDomain}/SitePages/myPage.aspx",
+      "pageUrl": "https://expiredsmellthis.sharepoint.com/sites/socks",
       "customActions": {
         "6bfd4451-fac3-413c-af87-3ec3a36ec7ee": {
           "location": "ClientSideExtension.ApplicationCustomizer",

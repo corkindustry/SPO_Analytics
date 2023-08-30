@@ -5,6 +5,7 @@ import { override } from "@microsoft/decorators";
 import * as strings from "SpoAnalyticsApplicationCustomizerStrings";
 
 import { pageSet, identity, listStatus, newUser } from "./modules/Setup";
+import { createItem, updateItem } from "./modules/CreateUpdate";
 
 const LOG_SOURCE: string = "SpoAnalyticsApplicationCustomizer";
 
@@ -25,7 +26,7 @@ export default class SpoAnalyticsApplicationCustomizer extends BaseApplicationCu
 
   public async pageHit(page: string) {
     const user = await identity(this.context);
-    const url = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('SPO_Analytics')/items?$select=Id,Title,${page}&$filter=Title eq ${user.upn}'`;
+    const url = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('SPO_Analytics')/items?$select=Id,Title,${page}&$filter=Title eq '${user.upn}'`;
     const status: number = await listStatus(this.context, url);
 
     if (status === 200) {
