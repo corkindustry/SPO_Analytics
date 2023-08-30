@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "spo-analytics-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/spoAnalytics/SpoAnalyticsApplicationCustomizer.js",
+          "manifest": "./src/extensions/spoAnalytics/SpoAnalyticsApplicationCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SpoAnalyticsApplicationCustomizerStrings": "lib/extensions/spoAnalytics/loc/{locale}.js"
+  }
+}

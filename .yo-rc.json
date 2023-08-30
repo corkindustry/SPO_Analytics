@@ -1,0 +1,22 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "16.20.0",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.9.1"
+    },
+    "version": "1.17.4",
+    "libraryName": "spo-analytics",
+    "libraryId": "0c3e97c6-18eb-4945-bf1f-b1f21d2057e2",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "spo-analytics",
+    "solutionShortDescription": "spo-analytics description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "extension",
+    "extensionType": "ApplicationCustomizer"
+  }
+}
