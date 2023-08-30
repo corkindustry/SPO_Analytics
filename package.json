@@ -9,14 +9,15 @@
   "scripts": {
     "build": "gulp bundle",
     "clean": "gulp clean",
-    "test": "gulp test"
+    "test": "gulp test", 
+    "pkg": "clear && gulp bundle --ship && gulp package-solution --ship"
   },
   "dependencies": {
     "@microsoft/decorators": "1.17.4",
     "@microsoft/sp-application-base": "1.17.4",
     "@microsoft/sp-core-library": "1.17.4",
     "@microsoft/sp-dialog": "1.17.4",
-    "@microsoft/sp-extension-base": "^1.17.4",
+    "@microsoft/sp-extension-base": "1.17.4",
     "@microsoft/sp-http": "1.17.4",
     "tslib": "2.3.1"
   },
