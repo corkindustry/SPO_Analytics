@@ -1,39 +1,40 @@
-import { Log } from '@microsoft/sp-core-library';
-import {
-  BaseApplicationCustomizer
-} from '@microsoft/sp-application-base';
-import { Dialog } from '@microsoft/sp-dialog';
+import { Log } from "@microsoft/sp-core-library";
+import { BaseApplicationCustomizer } from "@microsoft/sp-application-base";
 
-import * as strings from 'SpoAnalyticsApplicationCustomizerStrings';
+import * as strings from "SpoAnalyticsApplicationCustomizerStrings";
+import { override } from "@microsoft/decorators";
 
-const LOG_SOURCE: string = 'SpoAnalyticsApplicationCustomizer';
+const LOG_SOURCE: string = "SpoAnalyticsApplicationCustomizer";
 
-/**
- * If your command set uses the ClientSideComponentProperties JSON input,
- * it will be deserialized into the BaseExtension.properties object.
- * You can define an interface to describe it.
- */
-export interface ISpoAnalyticsApplicationCustomizerProperties {
-  // This is an example; replace with your own property
-  testMessage: string;
-}
-
-/** A Custom Action which can be run during execution of a Client Side Application */
-export default class SpoAnalyticsApplicationCustomizer
-  extends BaseApplicationCustomizer<ISpoAnalyticsApplicationCustomizerProperties> {
-
-  public onInit(): Promise<void> {
+export default class SpoAnalyticsApplicationCustomizer extends BaseApplicationCustomizer<any> {
+  @override
+  public async onInit(): Promise<void> {
     Log.info(LOG_SOURCE, `Initialized ${strings.Title}`);
+    let page = await pageSet(this.context.pageContext.site.serverRequestPath);
+    page = page.substring(0, 32);
+    this.pageHit(page);
 
-    let message: string = this.properties.testMessage;
-    if (!message) {
-      message = '(No properties were provided.)';
-    }
-
-    Dialog.alert(`Hello from ${strings.Title}:\n\n${message}`).catch(() => {
-      /* handle error */
+    this.context.application.navigatedEvent.add(this, () => {
+      page = pageSet(this.context.pageContext.site.serverRequestPath);
+      page = page.substring(0, 32);
+      this.pageHit(page);
     });
+  }
 
-    return Promise.resolve();
+  public async pageHit(page: string) {
+    const user = await Identity(this.context);
+    const url = `${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('SPO_Analytics')/items?$select=Id,Title,${page}&$filter=Title eq ${user.upn}'`;
+    const status: number = await listStatus(this.context, url);
+
+    if (status === 200) {
+      const n: boolean = await newUser(this.context, url);
+      n
+        ? createItem(this.context, user, page)
+        : updateItem(this.context, page, url);
+    } else if (status === 404) {
+      console.log(`'SPO_Analytics' list does not exist on this site`);
+    } else if (status === 400) {
+      console.log(`This page is not being tracked`);
+    }
   }
 }
