@@ -31,9 +31,11 @@ export default class SpoAnalyticsApplicationCustomizer extends BaseApplicationCu
 
     if (status === 200) {
       const n: boolean = await newUser(this.context, url);
-      n
-        ? createItem(this.context, user, page)
-        : updateItem(this.context, page, url);
+      if (n) {
+        createItem(this.context, user, page);
+      } else {
+        updateItem(this.context, page, url);
+      }
     } else if (status === 404) {
       console.log(`'SPO_Analytics' list does not exist on this site`);
     } else if (status === 400) {

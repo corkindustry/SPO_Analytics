@@ -14,7 +14,7 @@ const fetchCount = async (
       return res.json();
     })
     .then((results: any) => {
-      id = results.value[0]["Id"];
+      id = results.value[0].Id;
       count = results.value[0][`${page}`];
     });
   return { id: id, count: count };
@@ -32,15 +32,15 @@ export const createItem = (
   });
   metadata = metadata.substring(1, metadata.length - 1);
 
-  let data: any = {};
-  data["Title"] = `${user.upn}`;
-  data["Username"] = `${user.name}`;
+  const data: any = {};
+  data.Title = `${user.upn}`;
+  data.Username = `${user.name}`;
   data[`${page}`] = 1;
 
   let JSONdata: string = JSON.stringify(data);
   JSONdata = JSONdata.substring(1, JSONdata.length - 1);
 
-  let body: string = `{${metadata},${JSONdata}}`;
+  const body: string = `{${metadata},${JSONdata}}`;
 
   ctxt.spHttpClient
     .post(
@@ -71,7 +71,7 @@ export const updateItem = async (
   url: string
 ) => {
   console.log("updating item");
-  let visitCount = await fetchCount(ctxt, page, url);
+  const visitCount = await fetchCount(ctxt, page, url);
   visitCount.count++;
 
   const listItemEntityTypeName: string = "SP.Data.SPO_x005f_AnalyticsListItem";
@@ -80,12 +80,12 @@ export const updateItem = async (
   });
   metadata = metadata.substring(1, metadata.length - 1);
 
-  let data: any = {};
+  const data: any = {};
   data[`${page}`] = visitCount.count;
   let JSONdata: string = JSON.stringify(data);
   JSONdata = JSONdata.substring(1, JSONdata.length - 1);
 
-  let body: string = `{${metadata},${JSONdata}}`;
+  const body: string = `{${metadata},${JSONdata}}`;
 
   ctxt.spHttpClient
     .post(
