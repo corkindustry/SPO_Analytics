@@ -33,10 +33,6 @@ jobs:
         gulp package-solution --ship
     
     - name: CLI for Microsoft 365 login
-      run: |
-        m365 login 
-
-    - name: CLI for Microsoft 365 login
       uses: pnp/action-cli-login@v2
       with:
         # TENANT: ${{ secrets.TENANT }}
