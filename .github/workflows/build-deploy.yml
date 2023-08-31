@@ -38,7 +38,7 @@ jobs:
     - name: Deploy app to a site collection
       uses: pnp/action-cli-deploy@v4
       with:
-        APP_FILE_PATH: sharepoint/solution/${{ variables.PACKAGEFILENAME }}
+        APP_FILE_PATH: sharepoint/solution/${{ env.PACKAGEFILENAME }}
         SCOPE: sitecollection
         SITE_COLLECTION_URL: ${{ secrets.URL }}
         OVERWRITE: true
