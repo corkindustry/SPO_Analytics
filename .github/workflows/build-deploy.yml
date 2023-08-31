@@ -17,6 +17,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 16.x
+
+    - name: Install Pnpm
+      run: npm install -g pnpm
     
     - name: Pnpm Clean Install
       run: pnpm i --frozen-lockfile
