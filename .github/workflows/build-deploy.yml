@@ -35,6 +35,8 @@ jobs:
     - name: CLI for Microsoft 365 login
       uses: pnp/action-cli-login@v2
       with:
+        TENANT: ${{ secrets.TENANT }}
+        APP_ID: ${{ secrets.APP_ID }}
         CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
     
     # Deploy package to tenant using action-cli-deploy
