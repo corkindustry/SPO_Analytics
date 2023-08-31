@@ -24,21 +24,27 @@ jobs:
     - name: Pnpm Clean Install
       run: pnpm i --frozen-lockfile
     
-    - name: Install Gulp CLI
-      run: npm install -g gulp-cli
+    - name: Install Gulp & M365 CLIs
+      run: npm install -g gulp-cli @pnp/cli-microsoft365
     
     - name: Bundle and package
       run: |
         gulp bundle --ship
         gulp package-solution --ship
+    
+    - name: CLI for Microsoft 365 login
+      run: |
+        m365 login 
 
     - name: CLI for Microsoft 365 login
       uses: pnp/action-cli-login@v2
       with:
-        TENANT: ${{ secrets.TENANT }}
-        APP_ID: ${{ secrets.APP_ID }}
-        CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
-        CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD}}
+        # TENANT: ${{ secrets.TENANT }}
+        # APP_ID: ${{ secrets.APP_ID }}
+        # CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
+        # CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD}}
+        ADMIN_USERNAME:  ${{ secrets.ADMIN_USERNAME }}
+        ADMIN_PASSWORD:  ${{ secrets.ADMIN_PASSWORD }}
     
     # Deploy package to tenant using action-cli-deploy
     - name: Deploy app to a site collection
