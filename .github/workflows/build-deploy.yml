@@ -1,0 +1,44 @@
+name: Build and Deploy the SPFx Solution
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  buildAndDeploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+      
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16.x
+    
+    - name: Npm Clean Install
+      run: npm clean-install
+    
+    - name: Install Gulp CLI
+      run: npm install -g gulp-cli
+    
+    - name: Bundle and package
+      run: |
+        gulp bundle --ship
+        gulp package-solution --ship
+
+    - name: CLI for Microsoft 365 login
+      uses: pnp/action-cli-login@v2
+      with:
+        CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
+    
+    # Deploy package to tenant using action-cli-deploy
+    - name: Deploy app to a site collection
+      uses: pnp/action-cli-deploy@v4
+      with:
+        APP_FILE_PATH: sharepoint/solution/${{ variables.PACKAGEFILENAME }}
+        SCOPE: sitecollection
+        SITE_COLLECTION_URL: ${{ secrets.URL }}
+        OVERWRITE: true
