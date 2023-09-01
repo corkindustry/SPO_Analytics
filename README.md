@@ -1,4 +1,6 @@
 # SPO Analytics 
+Originally built in Nov. 2018 for sp2010. SPFx version built in Jan. 2020 on SPFx 1.12.1  
+Could probably use some refactoring :smile:
 ## About 
 Track _who_ is visiting your site!  
 SPO Analytics is an SPFx Application Customizer that logs the number of times a user visits specific pages on an SPO site. The data is saved to a List on the same site. One row per user.
