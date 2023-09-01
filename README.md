@@ -1,73 +1,35 @@
-# spo-analytics
-
-## Summary
-
-Short summary on functionality and used technologies.
-
-[picture of the solution in action, if possible]
-
+# SPO Analytics 
+## About
+Track _who_ is visiting your site!  
+SPO Analytics is an SPFx Application Customizer that logs the number of times a user visits specific pages on an SPO site. The data is saved to a List on the same site. One row per user.
+---
+## Setup 
+Clone, package, deploy and install this solution to your site's App Catalog
+### List Setup
+- Create a List with this exact name: **SPO_Analytics**
+- New _Single Line of Text_ column: **Username**
+- New _Number_ column for each page you want to track
+  - The column names should match the page names exactly. Use the page's url to ensure that you have the corect name
+    For example, create a column called **Home** if you want to track your site's homepage
+  - Set the _Number of decimal places_ to 0
+  - Set the _Default value_ to 0
+- Ensure that everyone visiting your site can write to the **SPO_Analytics** List
+  - This may involve breaking inheritance on the List and giving the _Visitors_ group _Contribute_ rights
+- Sit back and watch the hits roll in!
+---
+## Troubleshooting
+Open devtools, the console should be logging one of these three messages:
+- 'SPO_Analytics' list does not exist on this site
+  - Make sure the List is created and named correctly
+- This page is not being tracked
+  - There isn't a column for current page. Make sure the column exists and is named correctly
+- creating item
+  - :thumbsup: A new user has visited the page
+- updating item
+  - :thumbsup: An existing user has returned to the page
+  
+If you don't see any of these messages, make sure the app is installed on the site.
+---
 ## Used SharePoint Framework Version
 
 ![version](https://img.shields.io/badge/version-1.17.4-green.svg)
-
-## Applies to
-
-- [SharePoint Framework](https://aka.ms/spfx)
-- [Microsoft 365 tenant](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
-
-> Get your own free development tenant by subscribing to [Microsoft 365 developer program](http://aka.ms/o365devprogram)
-
-## Prerequisites
-
-> Any special pre-requisites?
-
-## Solution
-
-| Solution    | Author(s)                                               |
-| ----------- | ------------------------------------------------------- |
-| folder name | Author details (name, company, twitter alias with link) |
-
-## Version history
-
-| Version | Date             | Comments        |
-| ------- | ---------------- | --------------- |
-| 1.1     | March 10, 2021   | Update comment  |
-| 1.0     | January 29, 2021 | Initial release |
-
-## Disclaimer
-
-**THIS CODE IS PROVIDED _AS IS_ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
-
----
-
-## Minimal Path to Awesome
-
-- Clone this repository
-- Ensure that you are at the solution folder
-- in the command-line run:
-  - **npm install**
-  - **gulp serve**
-
-> Include any additional steps as needed.
-
-## Features
-
-Description of the extension that expands upon high-level summary above.
-
-This extension illustrates the following concepts:
-
-- topic 1
-- topic 2
-- topic 3
-
-> Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions advance.
-
-> Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
-
-## References
-
-- [Getting started with SharePoint Framework](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
-- [Building for Microsoft teams](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/build-for-teams-overview)
-- [Use Microsoft Graph in your solution](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
-- [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/publish-to-marketplace-overview)
-- [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development
