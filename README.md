@@ -31,4 +31,4 @@ Open devtools, the console should be logging one of these three messages:
 If you don't see any of these messages, make sure the app is installed on the site.
 ## Used SharePoint Framework Version
 
-![version](https://img.shields.io/badge/version-1.17.4-green.svg)
+![version](https://img.shields.io/badge/version-1.18.0-green.svg)
